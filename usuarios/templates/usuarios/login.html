@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - POS</title>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión en el Sistema</h2>
+
+        <!-- Bloque para mostrar los mensajes de error configurados en la vista -->
+        {% if messages %}
+            <div class="alert-messages" style="margin-bottom: 15px;">
+                {% for message in messages %}
+                    <p style="color: red; font-weight: bold;">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Formulario de Login de Django -->
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Entrar al Sistema</button>
+        </form>
+    </div>
+</body>
+</html>

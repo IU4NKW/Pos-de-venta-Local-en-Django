@@ -2,6 +2,7 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from .models import PerfilUsuario
 
 class CustomLoginView(LoginView):
     template_name = 'usuarios/login.html'
@@ -10,8 +11,7 @@ class CustomLoginView(LoginView):
         user = self.request.user
         
         try:
-            # Evaluamos directamente contra el PerfilUsuario de negocio
-            perfil = user.perfilusuario
+            perfil = PerfilUsuario.objects.get(user=user)
             rol = perfil.rol
             
             if rol == 'administrador':
@@ -25,6 +25,5 @@ class CustomLoginView(LoginView):
                 return reverse_lazy('login')
                 
         except ObjectDoesNotExist:
-            # Si el usuario no tiene un perfil de rol asociado
-            messages.error(self.request, 'El usuario no tiene un perfil de rol asignado en el sistema.')
+            messages.error(self.request, 'error de credenciales')
             return reverse_lazy('login')
