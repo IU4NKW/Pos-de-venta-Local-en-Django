@@ -4,26 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - POS</title>
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="login-container">
-        <h2>Iniciar Sesión en el Sistema</h2>
+<body class="bg-slate-900 text-slate-100 flex items-center justify-center min-h-screen">
 
-        <!-- Bloque para mostrar los mensajes de error configurados en la vista -->
-        {% if messages %}
-            <div class="alert-messages" style="margin-bottom: 15px;">
-                {% for message in messages %}
-                    <p style="color: red; font-weight: bold;">{{ message }}</p>
-                {% endfor %}
+    <div class="w-full max-w-md p-8 bg-slate-800 rounded-2xl shadow-xl border border-slate-700">
+        <!-- Encabezado -->
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold tracking-tight text-white">Sistema POS</h1>
+            <p class="text-sm text-slate-400 mt-1">Ingresa tus credenciales para continuar</p>
+        </div>
+
+        <!-- Mensaje de error de Django si existe -->
+        {% if form.errors %}
+            <div class="mb-4 p-3 bg-red-500/10 border border-red-500/50 rounded-lg text-red-400 text-sm text-center">
+                Usuario o contraseña incorrectos. Inténtalo nuevamente.
             </div>
         {% endif %}
 
-        <!-- Formulario de Login de Django -->
-        <form method="post">
+        <!-- Formulario -->
+        <form method="post" class="space-y-6">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Entrar al Sistema</button>
+            
+            <!-- Renderizado de campos de Django adaptados con Tailwind -->
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Usuario</label>
+                {{ form.username }}
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Contraseña</label>
+                {{ form.password }}
+            </div>
+
+            <button type="submit" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl transition duration-200 shadow-lg shadow-indigo-600/30 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-800">
+                Entrar al Sistema
+            </button>
         </form>
     </div>
+
 </body>
 </html>

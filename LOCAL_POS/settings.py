@@ -75,13 +75,11 @@ WSGI_APPLICATION = 'LOCAL_POS.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Local_POS',  # Pon aquí el nombre exacto que le diste en MySQL
-        'USER': 'root',                        # Tu usuario de MySQL (por defecto suele ser root)
-        'PASSWORD': '',             
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 # Password validation

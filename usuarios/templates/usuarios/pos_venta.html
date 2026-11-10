@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caja / POS - Ventas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 flex h-screen overflow-hidden">
+
+    <!-- Sidebar Lateral de Vendedor -->
+    <aside class="w-64 bg-slate-800 border-r border-slate-700 flex flex-col">
+        <div class="p-6 border-b border-slate-700">
+            <h2 class="text-xl font-bold text-white tracking-wide">POS Caja</h2>
+            <p class="text-xs text-slate-400 mt-1">Terminal de Ventas</p>
+        </div>
+        <nav class="flex-1 p-4 space-y-2">
+            <a href="#" class="block px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium transition">Nueva Venta (POS)</a>
+            <a href="#" class="block px-4 py-2.5 text-slate-300 hover:bg-slate-700 hover:text-white rounded-xl transition">Consultar Precios</a>
+            <a href="#" class="block px-4 py-2.5 text-slate-300 hover:bg-slate-700 hover:text-white rounded-xl transition">Mis Ventas del Día</a>
+        </nav>
+        <div class="p-4 border-t border-slate-700">
+            <a href="{% url 'logout' %}" class="block w-full py-2 px-4 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-center rounded-xl font-medium transition">
+                Cerrar Sesión
+            </a>
+        </div>
+    </aside>
+
+    <!-- Contenido Principal: Interfaz de Caja -->
+    <main class="flex-1 flex flex-col overflow-y-auto">
+        <!-- Topbar -->
+        <header class="h-16 bg-slate-800 border-b border-slate-700 flex items-center justify-between px-8">
+            <h1 class="text-lg font-semibold text-white">Terminal de Caja</h1>
+            <div class="text-sm text-slate-400">
+                Vendedor: <span class="text-indigo-400 font-medium">{{ request.user.username }}</span>
+            </div>
+        </header>
+
+        <!-- Cuerpo del POS (Dividido en dos columnas: Productos/Búsqueda y Carrito/Cobro) -->
+        <div class="p-8 flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 overflow-hidden">
+            
+            <!-- Columna Izquierda: Búsqueda y Catálogo rápido (2 espacios) -->
+            <div class="lg:col-span-2 flex flex-col space-y-6">
+                <!-- Barra de búsqueda de productos -->
+                <div class="bg-slate-800 border border-slate-700 p-4 rounded-2xl flex items-center space-x-4">
+                    <input type="text" placeholder="Buscar producto por nombre o código de barras..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <button class="bg-indigo-600 hover:bg-indigo-500 px-6 py-2.5 rounded-xl font-medium transition">Buscar</button>
+                </div>
+
+                <!-- Cuadrícula de productos rápidos -->
+                <div class="flex-1 bg-slate-800 border border-slate-700 rounded-2xl p-6 overflow-y-auto">
+                    <h3 class="text-sm font-semibold text-slate-400 mb-4 uppercase tracking-wider">Productos Frecuentes</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <!-- Tarjeta de producto de ejemplo -->
+                        <div class="bg-slate-900 border border-slate-700/60 p-4 rounded-xl hover:border-indigo-500 cursor-pointer transition">
+                            <h4 class="font-medium text-white text-sm">Bebida 1.5L</h4>
+                            <p class="text-xs text-slate-400 mt-1">Stock: 24</p>
+                            <span class="inline-block mt-3 text-indigo-400 font-bold text-sm">$1.800</span>
+                        </div>
+                        <div class="bg-slate-900 border border-slate-700/60 p-4 rounded-xl hover:border-indigo-500 cursor-pointer transition">
+                            <h4 class="font-medium text-white text-sm">Pan Hallulla (Kg)</h4>
+                            <p class="text-xs text-slate-400 mt-1">Stock: 15 kg</p>
+                            <span class="inline-block mt-3 text-indigo-400 font-bold text-sm">$2.200</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Resumen de Venta / Carrito (1 espacio) -->
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4 border-b border-slate-700 pb-2">Carrito Actual</h3>
+                    <!-- Lista vacía de productos en venta -->
+                    <div class="space-y-3 text-sm text-slate-400 text-center py-12">
+                        <p>No hay productos agregados a la venta actual.</p>
+                    </div>
+                </div>
+
+                <!-- Totales y Botón de Cobro -->
+                <div class="border-t border-slate-700 pt-4 space-y-4">
+                    <div class="flex justify-between text-lg font-bold text-white">
+                        <span>Total a Pagar:</span>
+                        <span class="text-indigo-400">$0 CLP</span>
+                    </div>
+                    <button class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition shadow-lg shadow-emerald-600/20">
+                        Cobrar y Emitir Ticket
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

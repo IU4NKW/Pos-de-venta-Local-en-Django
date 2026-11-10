@@ -28,7 +28,7 @@ for data in usuarios_prueba:
         print(f"El usuario {data['username']} ya existía.")
 
     # Creamos o actualizamos su PerfilUsuario asociado
-    perfil, perfil_created = PerfilUsuario.objects.get_or_create(user=user)
+    perfil, perfil_created = PerfilUsuario.objects.get_or_create(usuario=user)
     perfil.rol = data['rol']
     perfil.save()
     print(f"-> Perfil asignado: {data['rol']} para {data['username']}\n")
