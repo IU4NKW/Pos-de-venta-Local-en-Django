@@ -1,0 +1,90 @@
+{% extends 'usuarios/base_vendedor.html' %}
+{% block title %}Historial de Ventas · Vendedor{% endblock %}
+{% block page_title %}Historial de Ventas{% endblock %}
+
+{% block contenido %}
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+    <div class="flex flex-wrap items-center gap-3">
+        <input type="date" class="rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/40">
+        <select class="rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/40">
+            <option>Todos los documentos</option>
+            <option>Boleta</option>
+            <option>Factura</option>
+        </select>
+        <button class="ml-auto px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-700 to-teal-700 text-white text-sm font-semibold shadow hover:from-cyan-800 hover:to-teal-800 transition">Filtrar</button>
+    </div>
+    <p class="text-xs text-slate-400 mt-3">Solo se muestran las ventas realizadas por tu usuario.</p>
+</div>
+
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+        <h3 class="font-semibold text-slate-800">Mis ventas de hoy</h3>
+        <span class="text-xs text-slate-400">4 documentos</span>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead class="bg-slate-50 text-slate-500 text-left">
+                <tr>
+                    <th class="px-6 py-3 font-semibold">Documento</th>
+                    <th class="px-6 py-3 font-semibold">Hora</th>
+                    <th class="px-6 py-3 font-semibold">Cliente</th>
+                    <th class="px-6 py-3 font-semibold">Pago</th>
+                    <th class="px-6 py-3 font-semibold text-right">Total</th>
+                    <th class="px-6 py-3 font-semibold">Estado</th>
+                    <th class="px-6 py-3 font-semibold text-right">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                <tr class="hover:bg-cyan-50/30 transition">
+                    <td class="px-6 py-3 font-medium text-slate-700">BOL-000124</td>
+                    <td class="px-6 py-3 text-slate-500">10:24</td>
+                    <td class="px-6 py-3 text-slate-600">Consumidor final</td>
+                    <td class="px-6 py-3 text-slate-600">Débito</td>
+                    <td class="px-6 py-3 text-right font-semibold text-slate-700">$12.450</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">Emitida</span></td>
+                    <td class="px-6 py-3 text-right">
+                        <button class="px-3 py-1 rounded-lg border border-slate-200 text-slate-600 text-xs hover:bg-slate-50">Ver detalle</button>
+                    </td>
+                </tr>
+                <tr class="hover:bg-cyan-50/30 transition">
+                    <td class="px-6 py-3 font-medium text-slate-700">BOL-000121</td>
+                    <td class="px-6 py-3 text-slate-500">09:46</td>
+                    <td class="px-6 py-3 text-slate-600">12.345.678-9</td>
+                    <td class="px-6 py-3 text-slate-600">Efectivo</td>
+                    <td class="px-6 py-3 text-right font-semibold text-slate-700">$7.890</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">Emitida</span></td>
+                    <td class="px-6 py-3 text-right">
+                        <button class="px-3 py-1 rounded-lg border border-slate-200 text-slate-600 text-xs hover:bg-slate-50">Ver detalle</button>
+                    </td>
+                </tr>
+                <tr class="hover:bg-cyan-50/30 transition">
+                    <td class="px-6 py-3 font-medium text-slate-700">FAC-000086</td>
+                    <td class="px-6 py-3 text-slate-500">09:12</td>
+                    <td class="px-6 py-3 text-slate-600">Comercial Andes Ltda.</td>
+                    <td class="px-6 py-3 text-slate-600">Crédito</td>
+                    <td class="px-6 py-3 text-right font-semibold text-slate-700">$89.900</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">Emitida</span></td>
+                    <td class="px-6 py-3 text-right">
+                        <button class="px-3 py-1 rounded-lg border border-slate-200 text-slate-600 text-xs hover:bg-slate-50">Ver detalle</button>
+                    </td>
+                </tr>
+                <tr class="hover:bg-cyan-50/30 transition">
+                    <td class="px-6 py-3 font-medium text-slate-700">BOL-000119</td>
+                    <td class="px-6 py-3 text-slate-500">08:55</td>
+                    <td class="px-6 py-3 text-slate-600">Consumidor final</td>
+                    <td class="px-6 py-3 text-slate-600">Efectivo</td>
+                    <td class="px-6 py-3 text-right font-semibold text-slate-700">$3.980</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-semibold">Devolución</span></td>
+                    <td class="px-6 py-3 text-right">
+                        <button class="px-3 py-1 rounded-lg border border-slate-200 text-slate-600 text-xs hover:bg-slate-50">Ver nota</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="bg-cyan-50 border border-cyan-100 rounded-2xl p-4 text-sm text-cyan-800">
+    Para anular una venta o emitir una devolución, solicita autorización al jefe de ventas.
+</div>
+{% endblock %}

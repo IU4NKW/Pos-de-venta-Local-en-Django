@@ -1,0 +1,88 @@
+{% extends 'usuarios/base_jefe.html' %}
+{% block title %}Alertas de Stock · Jefe{% endblock %}
+{% block page_title %}Alertas de Stock{% endblock %}
+
+{% block contenido %}
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div class="bg-white rounded-2xl border border-red-200 shadow-sm p-5">
+        <p class="text-xs font-semibold text-red-500 uppercase tracking-wide">Sin stock</p>
+        <p class="text-2xl font-bold text-red-600 mt-2">2</p>
+        <p class="text-xs text-red-500 mt-1">Requieren reposición urgente</p>
+    </div>
+    <div class="bg-white rounded-2xl border border-amber-200 shadow-sm p-5">
+        <p class="text-xs font-semibold text-amber-600 uppercase tracking-wide">Stock bajo</p>
+        <p class="text-2xl font-bold text-amber-700 mt-2">7</p>
+        <p class="text-xs text-amber-600 mt-1">Bajo el mínimo configurado</p>
+    </div>
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Productos monitoreados</p>
+        <p class="text-2xl font-bold text-slate-800 mt-2">148</p>
+        <p class="text-xs text-slate-500 mt-1">Alertas automáticas por stock</p>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div class="px-6 py-4 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3">
+        <h3 class="font-semibold text-slate-800">Alertas activas</h3>
+        <a href="{% url 'jefe_inventario' %}" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-700 to-teal-700 text-white text-sm font-semibold shadow hover:from-cyan-800 hover:to-teal-800 transition">Ir a inventario</a>
+    </div>
+    <div class="divide-y divide-slate-100">
+        <div class="p-6 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-start gap-4">
+                <span class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold">!</span>
+                <div>
+                    <p class="font-semibold text-slate-800">Leche entera 1L</p>
+                    <p class="text-sm text-slate-500 mt-1">Sin stock · Código 7801112223334</p>
+                    <p class="text-xs text-red-500 mt-1">Última venta: hoy 08:45</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="px-3 py-1.5 rounded-full bg-red-50 text-red-600 border border-red-200 text-xs font-semibold">Crítico</span>
+                <button class="px-4 py-2 rounded-xl border border-cyan-200 text-cyan-700 text-sm font-semibold hover:bg-cyan-50 transition">Reponer</button>
+            </div>
+        </div>
+        <div class="p-6 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-start gap-4">
+                <span class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-bold">!</span>
+                <div>
+                    <p class="font-semibold text-slate-800">Aceite 1L</p>
+                    <p class="text-sm text-slate-500 mt-1">Stock 3 · Mínimo 10 · Código 7803339876543</p>
+                    <p class="text-xs text-red-500 mt-1">Riesgo de quiebre de stock</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="px-3 py-1.5 rounded-full bg-red-50 text-red-600 border border-red-200 text-xs font-semibold">Crítico</span>
+                <button class="px-4 py-2 rounded-xl border border-cyan-200 text-cyan-700 text-sm font-semibold hover:bg-cyan-50 transition">Reponer</button>
+            </div>
+        </div>
+        <div class="p-6 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-start gap-4">
+                <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">!</span>
+                <div>
+                    <p class="font-semibold text-slate-800">Arroz 1kg</p>
+                    <p class="text-sm text-slate-500 mt-1">Stock 8 · Mínimo 12 · Código 7809876543210</p>
+                    <p class="text-xs text-amber-600 mt-1">Reponer durante la jornada</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs font-semibold">Stock bajo</span>
+                <button class="px-4 py-2 rounded-xl border border-cyan-200 text-cyan-700 text-sm font-semibold hover:bg-cyan-50 transition">Reponer</button>
+            </div>
+        </div>
+        <div class="p-6 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-start gap-4">
+                <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">!</span>
+                <div>
+                    <p class="font-semibold text-slate-800">Harina 1kg</p>
+                    <p class="text-sm text-slate-500 mt-1">Stock 9 · Mínimo 15 · Código 7807778889990</p>
+                    <p class="text-xs text-amber-600 mt-1">Reponer durante la jornada</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs font-semibold">Stock bajo</span>
+                <button class="px-4 py-2 rounded-xl border border-cyan-200 text-cyan-700 text-sm font-semibold hover:bg-cyan-50 transition">Reponer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

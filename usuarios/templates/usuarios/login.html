@@ -4,21 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - POS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"IBM Plex Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        #id_username, #id_password {
+            width: 100%;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: #1e293b;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        #id_username::placeholder, #id_password::placeholder {
+            color: #94a3b8;
+        }
+        #id_username:focus, #id_password:focus {
+            outline: none;
+            border-color: #047857;
+            box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.15);
+        }
+    </style>
 </head>
-<body class="bg-slate-900 text-slate-100 flex items-center justify-center min-h-screen">
+<body class="bg-gradient-to-br from-slate-200 via-emerald-50 to-blue-50 text-slate-800 font-sans flex items-center justify-center min-h-screen">
 
-    <div class="w-full max-w-md p-8 bg-slate-800 rounded-2xl shadow-xl border border-slate-700">
+    <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-xl shadow-slate-300/60 border border-slate-200">
         <!-- Encabezado -->
         <div class="text-center mb-8">
-            <h1 class="text-2xl font-bold tracking-tight text-white">Sistema POS</h1>
-            <p class="text-sm text-slate-400 mt-1">Ingresa tus credenciales para continuar</p>
+            <div class="mx-auto mb-4 w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1d4ed8] to-emerald-700 text-white flex items-center justify-center shadow-lg shadow-slate-400/50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9 4.5 4h15L21 9"/>
+                    <path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/>
+                    <path d="M9 20v-5h6v5"/>
+                    <path d="M3 9h18"/>
+                </svg>
+            </div>
+            <h1 class="text-2xl font-bold tracking-tight text-slate-800">Sistema POS</h1>
+            <p class="text-sm text-slate-500 mt-1">Ingresa tus credenciales para continuar</p>
         </div>
 
         <!-- Mensaje de error de Django si existe -->
         {% if form.errors %}
-            <div class="mb-4 p-3 bg-red-500/10 border border-red-500/50 rounded-lg text-red-400 text-sm text-center">
+            <div class="mb-4 p-3 bg-red-50 border border-red-300 rounded-lg text-red-700 text-sm text-center">
                 Usuario o contraseña incorrectos. Inténtalo nuevamente.
             </div>
         {% endif %}
@@ -29,16 +70,16 @@
             
             <!-- Renderizado de campos de Django adaptados con Tailwind -->
             <div>
-                <label class="block text-sm font-medium text-slate-300 mb-2">Usuario</label>
+                <label class="block text-sm font-medium text-slate-700 mb-2">Usuario</label>
                 {{ form.username }}
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-slate-300 mb-2">Contraseña</label>
+                <label class="block text-sm font-medium text-slate-700 mb-2">Contraseña</label>
                 {{ form.password }}
             </div>
 
-            <button type="submit" class="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl transition duration-200 shadow-lg shadow-indigo-600/30 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-800">
+            <button type="submit" class="w-full py-3 px-4 bg-gradient-to-r from-[#1d4ed8] to-emerald-700 hover:from-[#1e40af] hover:to-emerald-800 text-white font-semibold rounded-xl transition duration-200 shadow-lg shadow-slate-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2 focus:ring-offset-white">
                 Entrar al Sistema
             </button>
         </form>

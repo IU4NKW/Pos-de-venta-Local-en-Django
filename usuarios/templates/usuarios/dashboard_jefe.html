@@ -4,23 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Ventas - POS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"IBM Plex Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-slate-900 text-slate-100 flex h-screen overflow-hidden">
+<body class="bg-slate-100 text-slate-800 font-sans flex h-screen overflow-hidden">
 
     <!-- Sidebar Lateral -->
-    <aside class="w-64 bg-slate-800 border-r border-slate-700 flex flex-col">
-        <div class="p-6 border-b border-slate-700">
-            <h2 class="text-xl font-bold text-white tracking-wide">POS Ventas</h2>
-            <p class="text-xs text-slate-400 mt-1">Supervisión Comercial</p>
+    <aside class="w-64 bg-gradient-to-b from-[#16324f] via-[#1a3350] to-[#1e3a5f] text-white flex flex-col shadow-lg shadow-slate-400/40">
+        <div class="p-6 border-b border-white/10 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-white/10 ring-1 ring-white/20 flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9 4.5 4h15L21 9"/>
+                    <path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/>
+                    <path d="M9 20v-5h6v5"/>
+                    <path d="M3 9h18"/>
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold text-white tracking-wide">POS Ventas</h2>
+                <p class="text-xs text-slate-300 mt-1">Supervisión Comercial</p>
+            </div>
         </div>
         <nav class="flex-1 p-4 space-y-2">
-            <a href="#" class="block px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium transition">Resumen de Ventas</a>
-            <a href="#" class="block px-4 py-2.5 text-slate-300 hover:bg-slate-700 hover:text-white rounded-xl transition">Control de Stock</a>
-            <a href="#" class="block px-4 py-2.5 text-slate-300 hover:bg-slate-700 hover:text-white rounded-xl transition">Arqueo de Caja</a>
+            <a href="{% url 'dashboard_jefe' %}" class="block px-4 py-2.5 bg-cyan-800/70 text-white rounded-xl font-semibold border border-cyan-400/30 shadow-inner transition">Resumen de Ventas</a>
+            <a href="{% url 'jefe_pos' %}" class="block px-4 py-2.5 text-slate-300 hover:bg-white/10 hover:text-white rounded-xl transition">POS y Ventas</a>
+            <a href="{% url 'jefe_historial' %}" class="block px-4 py-2.5 text-slate-300 hover:bg-white/10 hover:text-white rounded-xl transition">Historial y Devoluciones</a>
+            <a href="{% url 'jefe_arqueo' %}" class="block px-4 py-2.5 text-slate-300 hover:bg-white/10 hover:text-white rounded-xl transition">Arqueo de Caja</a>
+            <a href="{% url 'jefe_inventario' %}" class="block px-4 py-2.5 text-slate-300 hover:bg-white/10 hover:text-white rounded-xl transition">Inventario</a>
+            <a href="{% url 'jefe_alertas' %}" class="block px-4 py-2.5 text-slate-300 hover:bg-white/10 hover:text-white rounded-xl transition">Alertas de Stock</a>
         </nav>
-        <div class="p-4 border-t border-slate-700">
-            <a href="{% url 'logout' %}" class="block w-full py-2 px-4 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-center rounded-xl font-medium transition">
+        <div class="p-4 border-t border-white/10">
+            <p class="text-[11px] text-slate-400 mb-2">Sin acceso a gestión de usuarios ni auditoría.</p>
+            <a href="{% url 'logout' %}" class="block w-full py-2 px-4 bg-red-900/40 hover:bg-red-900/60 text-red-100 text-center rounded-xl font-medium transition border border-red-300/20">
                 Cerrar Sesión
             </a>
         </div>
@@ -28,30 +56,120 @@
 
     <!-- Contenido Principal -->
     <main class="flex-1 flex flex-col overflow-y-auto">
-        <!-- Topbar -->
-        <header class="h-16 bg-slate-800 border-b border-slate-700 flex items-center justify-between px-8">
-            <h1 class="text-lg font-semibold text-white">Panel de Jefe de Ventas</h1>
-            <div class="text-sm text-slate-400">
-                Conectado como: <span class="text-indigo-400 font-medium">{{ request.user.username }}</span>
+        <!-- Topbar con estado de jornada y conexión -->
+        <header class="min-h-16 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-3 px-8 py-3 shadow-sm">
+            <h1 class="text-lg font-semibold text-slate-800">Panel de Jefe de Ventas</h1>
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>Jornada abierta
+                </span>
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-50 text-cyan-700 border border-cyan-200 text-xs font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-cyan-500"></span>Online · Sincronizado
+                </span>
+                <div class="text-sm text-slate-500 ml-2">
+                    Conectado como: <span class="text-cyan-700 font-semibold">{{ request.user.username }}</span>
+                </div>
             </div>
         </header>
 
         <!-- Cuerpo del Dashboard -->
         <div class="p-8 space-y-6">
-            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl">
+            <div class="bg-gradient-to-r from-[#1e3a5f] to-cyan-700 rounded-2xl p-6 shadow-lg shadow-slate-400/40">
                 <h3 class="text-xl font-bold text-white mb-2">Bienvenido, Jefe de Ventas</h3>
-                <p class="text-slate-400 text-sm">Supervisa el flujo comercial diario, el rendimiento de los vendedores y el inventario disponible en el local.</p>
+                <p class="text-cyan-50/90 text-sm">Supervisa las ventas del negocio, administra la jornada diaria, el inventario y las alertas de stock en tiempo real.</p>
             </div>
 
-            <!-- Métricas orientadas a ventas -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl">
-                    <p class="text-sm text-slate-400">Transacciones del Día</p>
-                    <h4 class="text-2xl font-bold text-white mt-1">0</h4>
+            <!-- Control de jornada -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-base font-bold text-slate-800">Control de Jornada</h3>
+                    <p class="text-sm text-slate-500 mt-1">Jornada abierta a las 09:00 hrs. Tienes permisos operativos completos para apertura y cierre.</p>
                 </div>
-                <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl">
-                    <p class="text-sm text-slate-400">Productos con Stock Crítico</p>
-                    <h4 class="text-2xl font-bold text-amber-400 mt-1">0</h4>
+                <div class="flex items-center gap-2">
+                    <a href="{% url 'abrir_jornada_jefe' %}" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-700 to-teal-700 hover:from-cyan-800 hover:to-teal-800 text-white text-sm font-semibold shadow transition">Abrir Jornada</a>
+                    <a href="{% url 'cerrar_jornada_jefe' %}" class="px-4 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-sm font-semibold transition">Cerrar Jornada</a>
+                </div>
+            </div>
+
+            <!-- Métricas principales -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white border border-slate-200 border-t-4 border-t-emerald-700 p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <p class="text-sm text-slate-500">Total Recaudado Hoy</p>
+                    <h4 class="text-2xl font-bold text-slate-800 mt-1">$0 CLP</h4>
+                </div>
+                <div class="bg-white border border-slate-200 border-t-4 border-t-yellow-600 p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <p class="text-sm text-slate-500">IVA del Día</p>
+                    <h4 class="text-2xl font-bold text-slate-800 mt-1">$0 CLP</h4>
+                </div>
+                <div class="bg-white border border-slate-200 border-t-4 border-t-teal-700 p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <p class="text-sm text-slate-500">Transacciones del Día</p>
+                    <h4 class="text-2xl font-bold text-slate-800 mt-1">0</h4>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Desglose por método de pago -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                    <h3 class="text-base font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Desglose por Método de Pago</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600">Efectivo</span>
+                            <span class="font-semibold text-slate-800">$0 CLP</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600">Débito</span>
+                            <span class="font-semibold text-slate-800">$0 CLP</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600">Crédito</span>
+                            <span class="font-semibold text-slate-800">$0 CLP</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600">Transferencia</span>
+                            <span class="font-semibold text-slate-800">$0 CLP</span>
+                        </div>
+                    </div>
+                    <a href="{% url 'jefe_arqueo' %}" class="block mt-4 w-full border border-cyan-700 text-cyan-700 hover:bg-cyan-50 py-2 rounded-xl text-sm font-semibold transition text-center">Ir a Arqueo de Caja</a>
+                </div>
+
+                <!-- Ventas por vendedor -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                    <h3 class="text-base font-bold text-slate-800 mb-4 border-b border-slate-100 pb-2">Ventas por Vendedor</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600">Vendedor 1</span>
+                            <span class="font-semibold text-slate-800">$0 CLP</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600">Vendedor 2</span>
+                            <span class="font-semibold text-slate-800">$0 CLP</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600">Vendedor 3</span>
+                            <span class="font-semibold text-slate-800">$0 CLP</span>
+                        </div>
+                    </div>
+                    <a href="{% url 'jefe_historial' %}" class="block mt-4 w-full border border-cyan-700 text-cyan-700 hover:bg-cyan-50 py-2 rounded-xl text-sm font-semibold transition text-center">Ver Historial Completo</a>
+                </div>
+            </div>
+
+            <!-- Inventario y alertas -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                    <h3 class="text-base font-bold text-slate-800 mb-2">Catálogo e Inventario</h3>
+                    <p class="text-sm text-slate-500">Gestión integral de productos: crear, editar y eliminar artículos del catálogo.</p>
+                    <a href="{% url 'jefe_inventario' %}" class="inline-block mt-4 border border-cyan-700 text-cyan-700 hover:bg-cyan-50 px-4 py-2 rounded-xl text-sm font-semibold transition">Gestionar Inventario</a>
+                </div>
+                <div class="bg-white border border-slate-200 border-l-4 border-l-yellow-600 rounded-2xl p-6 shadow-sm">
+                    <h3 class="text-base font-bold text-slate-800 mb-2">Alertas de Stock Mínimo</h3>
+                    <p class="text-sm text-slate-500">Panel de alertas automáticas (patrón Observer) para productos con stock crítico.</p>
+                    <div class="mt-3 flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl font-bold text-yellow-700">0</span>
+                            <span class="text-sm text-slate-500">productos en nivel crítico</span>
+                        </div>
+                        <a href="{% url 'jefe_alertas' %}" class="text-sm font-semibold text-cyan-700 hover:text-cyan-800">Ver alertas</a>
+                    </div>
                 </div>
             </div>
         </div>

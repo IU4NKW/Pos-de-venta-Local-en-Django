@@ -1,0 +1,103 @@
+{% extends 'usuarios/base_admin.html' %}
+{% block title %}Historial y Devoluciones · Admin{% endblock %}
+{% block page_title %}Historial y Devoluciones{% endblock %}
+
+{% block contenido %}
+<div class="bg-white rounded-2xl border border-sky-100 shadow-sm p-5">
+    <div class="flex flex-wrap items-center gap-3">
+        <input type="date" class="rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/40">
+        <select class="rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/40">
+            <option>Todos los vendedores</option>
+            <option>Vendedor 1</option>
+            <option>Vendedor 2</option>
+        </select>
+        <select class="rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/40">
+            <option>Todos los estados</option>
+            <option>Emitida</option>
+            <option>Anulada</option>
+            <option>Devolución</option>
+        </select>
+        <button class="ml-auto px-4 py-2 rounded-xl bg-gradient-to-r from-[#3b7fa6] to-[#58a1c7] text-white text-sm font-semibold shadow hover:from-[#2f6f8f] hover:to-[#3b7fa6] transition">Filtrar</button>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl border border-sky-100 shadow-sm overflow-hidden">
+    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+        <h3 class="font-semibold text-slate-800">Documentos emitidos</h3>
+        <span class="text-xs text-slate-400">Mostrando 4 registros de ejemplo</span>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead class="bg-sky-50/60 text-slate-500 text-left">
+                <tr>
+                    <th class="px-6 py-3 font-semibold">Documento</th>
+                    <th class="px-6 py-3 font-semibold">Fecha</th>
+                    <th class="px-6 py-3 font-semibold">Vendedor</th>
+                    <th class="px-6 py-3 font-semibold">Pago</th>
+                    <th class="px-6 py-3 font-semibold text-right">Total</th>
+                    <th class="px-6 py-3 font-semibold">Estado</th>
+                    <th class="px-6 py-3 font-semibold text-right">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                <tr class="hover:bg-sky-50/40 transition">
+                    <td class="px-6 py-3 font-medium text-slate-700">BOL-000124</td>
+                    <td class="px-6 py-3 text-slate-500">13/11/2026 10:24</td>
+                    <td class="px-6 py-3 text-slate-600">vendedor1</td>
+                    <td class="px-6 py-3 text-slate-600">Débito</td>
+                    <td class="px-6 py-3 text-right font-semibold text-slate-700">$12.450</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">Emitida</span></td>
+                    <td class="px-6 py-3 text-right">
+                        <div class="flex justify-end gap-2">
+                            <button class="px-3 py-1 rounded-lg border border-slate-200 text-slate-600 text-xs hover:bg-slate-50">Ver</button>
+                            <button class="px-3 py-1 rounded-lg border border-amber-200 text-amber-700 text-xs hover:bg-amber-50">Devolución</button>
+                            <button class="px-3 py-1 rounded-lg border border-red-200 text-red-600 text-xs hover:bg-red-50">Anular</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition">
+                    <td class="px-6 py-3 font-medium text-slate-700">FAC-000087</td>
+                    <td class="px-6 py-3 text-slate-500">13/11/2026 09:58</td>
+                    <td class="px-6 py-3 text-slate-600">vendedor2</td>
+                    <td class="px-6 py-3 text-slate-600">Crédito</td>
+                    <td class="px-6 py-3 text-right font-semibold text-slate-700">$45.900</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">Emitida</span></td>
+                    <td class="px-6 py-3 text-right">
+                        <div class="flex justify-end gap-2">
+                            <button class="px-3 py-1 rounded-lg border border-slate-200 text-slate-600 text-xs hover:bg-slate-50">Ver</button>
+                            <button class="px-3 py-1 rounded-lg border border-amber-200 text-amber-700 text-xs hover:bg-amber-50">Devolución</button>
+                            <button class="px-3 py-1 rounded-lg border border-red-200 text-red-600 text-xs hover:bg-red-50">Anular</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition">
+                    <td class="px-6 py-3 font-medium text-slate-700">BOL-000123</td>
+                    <td class="px-6 py-3 text-slate-500">13/11/2026 09:31</td>
+                    <td class="px-6 py-3 text-slate-600">vendedor1</td>
+                    <td class="px-6 py-3 text-slate-600">Efectivo</td>
+                    <td class="px-6 py-3 text-right font-semibold text-slate-700">$5.880</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">Anulada</span></td>
+                    <td class="px-6 py-3 text-right">
+                        <div class="flex justify-end gap-2">
+                            <button class="px-3 py-1 rounded-lg border border-slate-200 text-slate-600 text-xs hover:bg-slate-50">Ver</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition">
+                    <td class="px-6 py-3 font-medium text-slate-700">BOL-000122</td>
+                    <td class="px-6 py-3 text-slate-500">13/11/2026 09:02</td>
+                    <td class="px-6 py-3 text-slate-600">vendedor2</td>
+                    <td class="px-6 py-3 text-slate-600">Débito</td>
+                    <td class="px-6 py-3 text-right font-semibold text-slate-700">$18.990</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-semibold">Devolución</span></td>
+                    <td class="px-6 py-3 text-right">
+                        <div class="flex justify-end gap-2">
+                            <button class="px-3 py-1 rounded-lg border border-slate-200 text-slate-600 text-xs hover:bg-slate-50">Ver nota</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

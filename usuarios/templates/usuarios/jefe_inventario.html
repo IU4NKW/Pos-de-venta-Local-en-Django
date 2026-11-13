@@ -1,0 +1,98 @@
+{% extends 'usuarios/base_jefe.html' %}
+{% block title %}Inventario · Jefe{% endblock %}
+{% block page_title %}Inventario{% endblock %}
+
+{% block contenido %}
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+            <h2 class="text-xl font-semibold text-slate-800">Productos y existencias</h2>
+            <p class="text-sm text-slate-500 mt-1">Actualiza precios, stock y disponibilidad de productos.</p>
+        </div>
+        <div class="flex gap-2">
+            <a href="{% url 'jefe_alertas' %}" class="px-4 py-2 rounded-xl border border-amber-200 bg-amber-50 text-amber-700 text-sm font-semibold hover:bg-amber-100 transition">Ver alertas</a>
+            <button class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-700 to-teal-700 text-white text-sm font-semibold shadow hover:from-cyan-800 hover:to-teal-800 transition">Agregar producto</button>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div class="px-6 py-4 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3">
+        <h3 class="font-semibold text-slate-800">Listado de productos</h3>
+        <input type="text" placeholder="Buscar por nombre o código..." class="rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/40">
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead class="bg-slate-50 text-slate-500 text-left">
+                <tr>
+                    <th class="px-6 py-3 font-semibold">Producto</th>
+                    <th class="px-6 py-3 font-semibold">Código</th>
+                    <th class="px-6 py-3 font-semibold">Categoría</th>
+                    <th class="px-6 py-3 font-semibold text-right">Precio</th>
+                    <th class="px-6 py-3 font-semibold text-right">Stock</th>
+                    <th class="px-6 py-3 font-semibold">Estado</th>
+                    <th class="px-6 py-3 font-semibold text-right">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                <tr class="hover:bg-cyan-50/30 transition">
+                    <td class="px-6 py-3 font-medium text-slate-700">Bebida cola 1.5L</td>
+                    <td class="px-6 py-3 text-slate-500">7801234567890</td>
+                    <td class="px-6 py-3 text-slate-600">Bebidas</td>
+                    <td class="px-6 py-3 text-right text-slate-700">$2.490</td>
+                    <td class="px-6 py-3 text-right font-semibold text-slate-700">24</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">Disponible</span></td>
+                    <td class="px-6 py-3 text-right">
+                        <div class="flex justify-end gap-2">
+                            <button class="px-3 py-1 rounded-lg border border-slate-200 text-slate-600 text-xs hover:bg-slate-50">Editar</button>
+                            <button class="px-3 py-1 rounded-lg border border-cyan-200 text-cyan-700 text-xs hover:bg-cyan-50">Reponer</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-cyan-50/30 transition">
+                    <td class="px-6 py-3 font-medium text-slate-700">Arroz 1kg</td>
+                    <td class="px-6 py-3 text-slate-500">7809876543210</td>
+                    <td class="px-6 py-3 text-slate-600">Abarrotes</td>
+                    <td class="px-6 py-3 text-right text-slate-700">$1.390</td>
+                    <td class="px-6 py-3 text-right font-semibold text-amber-600">8</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-semibold">Stock bajo</span></td>
+                    <td class="px-6 py-3 text-right">
+                        <div class="flex justify-end gap-2">
+                            <button class="px-3 py-1 rounded-lg border border-slate-200 text-slate-600 text-xs hover:bg-slate-50">Editar</button>
+                            <button class="px-3 py-1 rounded-lg border border-cyan-200 text-cyan-700 text-xs hover:bg-cyan-50">Reponer</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-cyan-50/30 transition">
+                    <td class="px-6 py-3 font-medium text-slate-700">Pan de molde</td>
+                    <td class="px-6 py-3 text-slate-500">7805551234567</td>
+                    <td class="px-6 py-3 text-slate-600">Panadería</td>
+                    <td class="px-6 py-3 text-right text-slate-700">$2.190</td>
+                    <td class="px-6 py-3 text-right font-semibold text-slate-700">15</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">Disponible</span></td>
+                    <td class="px-6 py-3 text-right">
+                        <div class="flex justify-end gap-2">
+                            <button class="px-3 py-1 rounded-lg border border-slate-200 text-slate-600 text-xs hover:bg-slate-50">Editar</button>
+                            <button class="px-3 py-1 rounded-lg border border-cyan-200 text-cyan-700 text-xs hover:bg-cyan-50">Reponer</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-cyan-50/30 transition">
+                    <td class="px-6 py-3 font-medium text-slate-700">Aceite 1L</td>
+                    <td class="px-6 py-3 text-slate-500">7803339876543</td>
+                    <td class="px-6 py-3 text-slate-600">Abarrotes</td>
+                    <td class="px-6 py-3 text-right text-slate-700">$3.290</td>
+                    <td class="px-6 py-3 text-right font-semibold text-red-600">3</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">Crítico</span></td>
+                    <td class="px-6 py-3 text-right">
+                        <div class="flex justify-end gap-2">
+                            <button class="px-3 py-1 rounded-lg border border-slate-200 text-slate-600 text-xs hover:bg-slate-50">Editar</button>
+                            <button class="px-3 py-1 rounded-lg border border-cyan-200 text-cyan-700 text-xs hover:bg-cyan-50">Reponer</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

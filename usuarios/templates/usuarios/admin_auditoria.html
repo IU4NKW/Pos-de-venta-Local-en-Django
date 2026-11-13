@@ -1,0 +1,104 @@
+{% extends 'usuarios/base_admin.html' %}
+{% block title %}Auditoría y Seguridad · Admin{% endblock %}
+{% block page_title %}Auditoría y Seguridad{% endblock %}
+
+{% block contenido %}
+<div class="bg-white rounded-2xl border border-sky-100 shadow-sm p-5">
+    <div class="flex flex-wrap items-center gap-3">
+        <input type="date" class="rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/40">
+        <select class="rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/40">
+            <option>Todos los usuarios</option>
+            <option>admin</option>
+            <option>jefe1</option>
+            <option>vendedor1</option>
+        </select>
+        <select class="rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/40">
+            <option>Todas las acciones</option>
+            <option>Inicio de sesión</option>
+            <option>Creación</option>
+            <option>Modificación</option>
+            <option>Anulación</option>
+        </select>
+        <button class="ml-auto px-4 py-2 rounded-xl bg-gradient-to-r from-[#3b7fa6] to-[#58a1c7] text-white text-sm font-semibold shadow hover:from-[#2f6f8f] hover:to-[#3b7fa6] transition">Filtrar</button>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div class="bg-white rounded-2xl border border-sky-100 shadow-sm p-5">
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Eventos hoy</p>
+        <p class="text-2xl font-bold text-slate-800 mt-2">46</p>
+    </div>
+    <div class="bg-white rounded-2xl border border-sky-100 shadow-sm p-5">
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Inicios de sesión</p>
+        <p class="text-2xl font-bold text-slate-800 mt-2">18</p>
+    </div>
+    <div class="bg-white rounded-2xl border border-red-100 shadow-sm p-5">
+        <p class="text-xs font-semibold text-red-500 uppercase tracking-wide">Eventos críticos</p>
+        <p class="text-2xl font-bold text-red-600 mt-2">1</p>
+        <p class="text-xs text-red-500 mt-1">Intento de acceso fallido</p>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl border border-sky-100 shadow-sm overflow-hidden">
+    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+        <h3 class="font-semibold text-slate-800">Registro de actividad</h3>
+        <span class="text-xs text-slate-400">Solo lectura · Trazabilidad completa</span>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead class="bg-sky-50/60 text-slate-500 text-left">
+                <tr>
+                    <th class="px-6 py-3 font-semibold">Fecha y hora</th>
+                    <th class="px-6 py-3 font-semibold">Usuario</th>
+                    <th class="px-6 py-3 font-semibold">Acción</th>
+                    <th class="px-6 py-3 font-semibold">Detalle</th>
+                    <th class="px-6 py-3 font-semibold">Origen</th>
+                    <th class="px-6 py-3 font-semibold">Severidad</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                <tr class="hover:bg-sky-50/40 transition">
+                    <td class="px-6 py-3 text-slate-500">13/11/2026 10:31</td>
+                    <td class="px-6 py-3 font-medium text-slate-700">admin</td>
+                    <td class="px-6 py-3 text-slate-600">Inicio de sesión</td>
+                    <td class="px-6 py-3 text-slate-500">Acceso correcto al panel administrativo</td>
+                    <td class="px-6 py-3 text-slate-500">192.168.1.10</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">Info</span></td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition">
+                    <td class="px-6 py-3 text-slate-500">13/11/2026 10:18</td>
+                    <td class="px-6 py-3 font-medium text-slate-700">jefe1</td>
+                    <td class="px-6 py-3 text-slate-600">Apertura de jornada</td>
+                    <td class="px-6 py-3 text-slate-500">Jornada abierta con fondo inicial $50.000</td>
+                    <td class="px-6 py-3 text-slate-500">192.168.1.24</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-sky-50 text-sky-700 text-xs font-semibold">Normal</span></td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition">
+                    <td class="px-6 py-3 text-slate-500">13/11/2026 09:47</td>
+                    <td class="px-6 py-3 font-medium text-slate-700">admin</td>
+                    <td class="px-6 py-3 text-slate-600">Usuario creado</td>
+                    <td class="px-6 py-3 text-slate-500">Alta de vendedor2 con rol Vendedor</td>
+                    <td class="px-6 py-3 text-slate-500">192.168.1.10</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-sky-50 text-sky-700 text-xs font-semibold">Normal</span></td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition">
+                    <td class="px-6 py-3 text-slate-500">13/11/2026 09:22</td>
+                    <td class="px-6 py-3 font-medium text-slate-700">vendedor1</td>
+                    <td class="px-6 py-3 text-slate-600">Devolución emitida</td>
+                    <td class="px-6 py-3 text-slate-500">Nota de crédito sobre BOL-000122 por $18.990</td>
+                    <td class="px-6 py-3 text-slate-500">192.168.1.31</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-semibold">Atención</span></td>
+                </tr>
+                <tr class="hover:bg-red-50/40 transition">
+                    <td class="px-6 py-3 text-slate-500">13/11/2026 08:56</td>
+                    <td class="px-6 py-3 font-medium text-slate-700">desconocido</td>
+                    <td class="px-6 py-3 text-slate-600">Acceso fallido</td>
+                    <td class="px-6 py-3 text-slate-500">3 intentos fallidos consecutivos</td>
+                    <td class="px-6 py-3 text-slate-500">200.83.12.5</td>
+                    <td class="px-6 py-3"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">Crítico</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
